@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: restaurant-service
+server:
+  port: 8080
+
+---
+spring:
+  profiles: dev
+  application:
+    name: restaurant-service
+server:
+  port: 9090
+
+---
+spring:
+  profiles: prod
+  application:
+    name: restaurant-service
+server:
+  port: 4431
