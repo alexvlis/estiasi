@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collection;
+import java.util.List;
 
 @Validated
 @RestController
@@ -28,6 +28,11 @@ public class RestaurantController {
     @GetMapping
     public Restaurant findById(@RequestParam("id") Integer id) throws Exception {
         return restaurantService.get(id);
+    }
+
+    @GetMapping("/name")
+    public List<Restaurant> findByName(@RequestParam("name") String name) throws Exception {
+        return restaurantService.get(name);
     }
 
     @GetMapping("/all")
