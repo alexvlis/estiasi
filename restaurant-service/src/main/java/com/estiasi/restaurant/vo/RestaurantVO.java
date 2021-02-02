@@ -1,9 +1,12 @@
 package com.estiasi.restaurant.vo;
 
-import javax.validation.constraints.Min;
+import com.estiasi.restaurant.model.Table;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantVO {
 
@@ -12,6 +15,7 @@ public class RestaurantVO {
     @NotEmpty
     @Size(min=2, max=256)
     private String name;
+    private List<Table> tables = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -28,4 +32,13 @@ public class RestaurantVO {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Table> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<Table> tables) {
+        this.tables = tables;
+    }
+
 }
