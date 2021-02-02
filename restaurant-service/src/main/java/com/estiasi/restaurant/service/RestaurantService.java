@@ -5,12 +5,14 @@ import com.estiasi.restaurant.model.Restaurant;
 import com.estiasi.restaurant.repositories.MemRestaurantRepository;
 import com.estiasi.restaurant.repositories.RestaurantRepository;
 import com.estiasi.service.BaseService;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,6 +40,13 @@ public class RestaurantService extends BaseService<Restaurant, Integer> {
         }
         logger.error("Failed to find restaurant with id {}", id);
         throw new EntityNotFoundException(Restaurant.class, id);
+    }
+
+    public List<Restaurant> get(String name) throws IllegalArgumentException {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Cannot search restaurants by name with empty name");
+        }
+        return restaurantRepository.findByName(name);
     }
 
     @Override

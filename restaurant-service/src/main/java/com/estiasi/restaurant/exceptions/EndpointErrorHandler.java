@@ -15,7 +15,7 @@ public class EndpointErrorHandler {
             EntityNotFoundException.class,
             DuplicateEntityFoundException.class,
             IllegalArgumentException.class})
-    public ResponseEntity<ErrorInfo> handleRestaurantNotFoundException(EntityNotFoundException ex) {
+    public ResponseEntity<ErrorInfo> handleRestaurantNotFoundException(Exception ex) {
         ErrorInfo errorInfo = new ErrorInfo();
         errorInfo.setMessage(ex.getMessage());
         return new ResponseEntity<>(errorInfo, HttpStatus.BAD_REQUEST);
