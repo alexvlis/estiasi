@@ -5,8 +5,15 @@ import com.estiasi.restaurant.service.RestaurantService;
 import com.estiasi.restaurant.vo.RestaurantVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.Collection;
+
+@Validated
 @RestController
 @RequestMapping("/v1/restaurants")
 public class RestaurantController {
@@ -23,11 +30,29 @@ public class RestaurantController {
         return restaurantService.get(id);
     }
 
+    @GetMapping("/all")
+    public Iterable<Restaurant> getAll() throws Exception {
+        return restaurantService.getAll();
+    }
+
     @PostMapping
-    public Restaurant createRestaurant(@RequestBody RestaurantVO restaurantVO) throws Exception {
+    public Restaurant createRestaurant(@RequestBody @Valid RestaurantVO restaurantVO) throws Exception {
         Restaurant restaurant = new Restaurant();
         BeanUtils.copyProperties(restaurantVO, restaurant);
         return restaurantService.add(restaurant);
+    }
+
+    @PutMapping
+    public Restaurant updateRestaurant(@RequestBody @Valid RestaurantVO restaurantVO) throws Exception {
+        Restaurant restaurant = new Restaurant();
+        BeanUtils.copyProperties(restaurantVO, restaurant);
+        return restaurantService.update(restaurant);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteRestaurant(@RequestParam("id") Integer id) throws Exception {
+        restaurantService.remove(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

@@ -2,8 +2,6 @@ package com.estiasi.service;
 
 import com.estiasi.repositories.ReadOnlyRepository;
 
-import java.util.Collection;
-
 public abstract class ReadOnlyBaseService<TE, T> {
 
     private final ReadOnlyRepository<TE, T> repository;
@@ -16,11 +14,11 @@ public abstract class ReadOnlyBaseService<TE, T> {
         return repository.contains(id);
     }
 
-    public TE get(T id) {
+    public TE get(T id) throws Exception {
         return repository.get(id);
     }
 
-    public Collection<TE> getAll() {
+    public Iterable<TE> getAll() {
         return repository.getAll();
     }
 

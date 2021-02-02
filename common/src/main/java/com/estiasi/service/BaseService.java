@@ -15,8 +15,9 @@ public abstract class BaseService<TE, T> extends ReadOnlyBaseService<TE, T> {
         repository.remove(id);
     }
 
-    public void update(TE entity) {
+    public TE update(TE entity) throws Exception {
         repository.update(entity);
+        return entity;
     }
 
     public TE add(TE entity) throws Exception {

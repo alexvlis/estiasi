@@ -19,7 +19,7 @@ public class UserService extends BaseService<User, Integer> {
     }
 
     @Override
-    public User get(Integer id) {
+    public User get(Integer id) throws Exception {
         if (super.contains(id)) {
             return super.get(id);
         }
