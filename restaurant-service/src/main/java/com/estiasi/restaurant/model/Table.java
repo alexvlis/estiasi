@@ -3,22 +3,21 @@ package com.estiasi.restaurant.model;
 import com.estiasi.model.BaseEntity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-@Entity(name = "restaurants")
-public class Restaurant extends BaseEntity<Integer> {
+@Entity(name = "tables")
+public class Table extends BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private String name;
+    private String code;
+    private Integer capacity;
+    private String zone;
     private Date created;
     private Date updated;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    private List<Table> tables = new ArrayList<>();
+    private Boolean smoking;
+    private Boolean outdoor;
 
     @Override
     public Integer getId() {
@@ -30,12 +29,28 @@ public class Restaurant extends BaseEntity<Integer> {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
     }
 
     @Basic
@@ -56,12 +71,24 @@ public class Restaurant extends BaseEntity<Integer> {
         return updated;
     }
 
-    public List<Table> getTables() {
-        return tables;
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
-    public void setTables(List<Table> tables) {
-        this.tables = tables;
+    public Boolean getSmoking() {
+        return smoking;
+    }
+
+    public void setSmoking(Boolean smoking) {
+        this.smoking = smoking;
+    }
+
+    public Boolean getOutdoor() {
+        return outdoor;
+    }
+
+    public void setOutdoor(Boolean outdoor) {
+        this.outdoor = outdoor;
     }
 
     @PrePersist

@@ -5,13 +5,11 @@ import com.estiasi.restaurant.model.Restaurant;
 import com.estiasi.restaurant.repositories.MemRestaurantRepository;
 import com.estiasi.restaurant.repositories.RestaurantRepository;
 import com.estiasi.service.BaseService;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,7 +73,7 @@ public class RestaurantService extends BaseService<Restaurant, Integer> {
             logger.error("Failed to update restaurant with id {}", restaurant.getId());
             throw new EntityNotFoundException(Restaurant.class, restaurant.getId());
         }
-        restaurantRepository.save(restaurant);
+        restaurant = restaurantRepository.save(restaurant);
         super.update(restaurant);
         return restaurant;
     }
