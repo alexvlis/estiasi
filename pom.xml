@@ -11,20 +11,42 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <spring.cloud-version>2020.0.0-M5</spring.cloud-version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <groupId>com.estiasi</groupId>
     <artifactId>estiasi</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
     <modules>
         <module>booking-service</module>
         <module>restaurant-service</module>
         <module>user-service</module>
         <module>common</module>
+        <module>eureka-server</module>
     </modules>
 
     <dependencies>
