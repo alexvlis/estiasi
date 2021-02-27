@@ -1,6 +1,7 @@
 package com.estiasi.restaurant.model;
 
 import com.estiasi.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -64,11 +65,15 @@ public class Restaurant extends BaseEntity<Integer> {
         this.tables = tables;
     }
 
+    @Transient
+    @JsonIgnore
     @PrePersist
     public void onCreate() {
         created = new Date();
     }
 
+    @Transient
+    @JsonIgnore
     @PreUpdate
     public void onUpdate() {
         updated = new Date();
