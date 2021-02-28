@@ -1,6 +1,6 @@
 package com.estiasi.restaurant;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class RestaurantServiceTests {
 
