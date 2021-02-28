@@ -10,7 +10,7 @@ jobs:
       - restore_cache:
           keys:
             - mvn-dependencies-
-      - run: mvn -pl gateway-server -am clean install
+      - run: mvn -pl eureka-server -am clean install
       - save_cache:
           paths:
             - ~/.m2
