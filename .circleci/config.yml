@@ -8,8 +8,7 @@ jobs:
       MAVEN_OPTS: -Xmx4200m
     steps:
       - checkout
-      - run: mvn install
-      - run: mvn test
+      - run: mvn clean install
       - run: mvn jacoco:report-aggregate
       - run: "bash <(curl -s https://codecov.io/bash)"
       - save_cache:
