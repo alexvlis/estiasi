@@ -9,13 +9,11 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-
-      - run: ls -la ~/.m2/repository/
-      - run: pwd
+            - mvn-dependencies-
       - run: mvn -pl gateway-server -am clean install
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-
+          key: mvn-dependencies-
       - run: mvn jacoco:report-aggregate
       - run: "bash <(curl -s https://codecov.io/bash)"
