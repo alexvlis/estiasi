@@ -1,16 +1,18 @@
 spring:
   application:
     name: restaurant-service
+  jpa:
+    hibernate:
+      ddl-auto: update
 server:
   port: 8080
 
-# Discovery Server Access
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 3
     leaseExpirationDurationInSeconds: 2
     metadataMap:
-      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+      instanceId: ${spring.application.name}:${random.value}
 
   client:
     registryFetchIntervalSeconds: 5
@@ -25,33 +27,35 @@ spring:
   profiles: dev
   application:
     name: restaurant-service
-server:
-  port: 9090
-
----
-spring:
-  profiles: prod
-  application:
-    name: restaurant-service
-server:
-  port: 4431
+  datasource:
+    url: jdbc:h2:mem:estiasi
+    driverClassName: org.h2.Driver
+    usernname: root
+    password:
 
 ---
 spring:
   profiles: docker
   application:
     name: restaurant-service
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    datasource:
+      url: jdbc:mysql://mysql:3306/estiasi
+      driverClassName: com.mysql.cj.jdbc.Driver
+      usernname: root
+      password:
 server:
   port: 4431
 
 eureka:
   instance:
     preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 60
   client:
-    registryFetchIntervalSeconds: 5
-    instanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 30
+    instanceInfoReplicationIntervalSeconds: 60
     initialInstanceInfoReplicationIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://eureka:8761/eureka/

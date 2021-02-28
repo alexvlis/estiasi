@@ -4,7 +4,7 @@ spring:
     name: eureka-server
 
 server:
-  port: ${vcap.application.port:8761}   # HTTP port
+  port: 8761
 
 info:
   component: Discovery Server
@@ -22,12 +22,11 @@ eureka:
     enableSelfPreservation: false
 
 ---
-# For deployment in Docker containers
 spring:
   profiles: docker
 
 server:
-  port: ${vcap.application.port:8761}
+  port: 8761
 
 eureka:
   instance:
