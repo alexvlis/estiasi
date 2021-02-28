@@ -8,7 +8,7 @@ jobs:
       MAVEN_OPTS: -Xmx4200m
     steps:
       - checkout
-      - run: mvn -pl eureka-server -am clean install
+      - run: mvn -pl gateway-server -am clean install
       - run: mvn jacoco:report-aggregate
       - run: "bash <(curl -s https://codecov.io/bash)"
       - save_cache:
