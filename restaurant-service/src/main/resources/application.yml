@@ -8,25 +8,13 @@ server:
   port: 8081
 
 eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 3
-    leaseExpirationDurationInSeconds: 2
-    metadataMap:
-      instanceId: ${spring.application.name}:${random.value}
-
   client:
-    registryFetchIntervalSeconds: 5
-    instanceInfoReplicationIntervalSeconds: 5
-    initialInstanceInfoReplicationIntervalSeconds: 5
     serviceUrl:
       defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
-    fetchRegistry: true
 
 ---
 spring:
   profiles: dev
-  application:
-    name: restaurant-service
   datasource:
     url: jdbc:h2:mem:estiasi
     driverClassName: org.h2.Driver
@@ -36,8 +24,6 @@ spring:
 ---
 spring:
   profiles: docker
-  application:
-    name: restaurant-service
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     datasource:
@@ -45,20 +31,8 @@ spring:
       driverClassName: com.mysql.cj.jdbc.Driver
       usernname: root
       password:
-server:
-  port: 4431
 
 eureka:
-  instance:
-    preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 30
-    leaseExpirationDurationInSeconds: 60
   client:
-    registryFetchIntervalSeconds: 30
-    instanceInfoReplicationIntervalSeconds: 60
-    initialInstanceInfoReplicationIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://eureka:8761/eureka/
-      fetchRegistry: true
-      healthcheck:
-        enabled: true
