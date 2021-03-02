@@ -10,7 +10,7 @@ jobs:
       - restore_cache:
           keys:
             - mvn-dependencies-
-      - run: mvn clean install
+      - run: mvn clean install -DskipTests
       - save_cache:
           paths:
             - ~/.m2
