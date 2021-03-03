@@ -11,7 +11,7 @@ jobs:
           keys:
             - mvn-dependencies-{{ checksum "pom.xml" }}
             - mvn-dependencies-
-      - run: mvn clean install -DskipTests
+      - run: mvn clean install
       - save_cache:
           paths:
             - ~/.m2
