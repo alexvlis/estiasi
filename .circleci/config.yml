@@ -9,11 +9,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
+            - mvn-dependencies-{{ checksum "pom.xml" }}
             - mvn-dependencies-
       - run: mvn clean install -DskipTests
       - save_cache:
           paths:
             - ~/.m2
-          key: mvn-dependencies-
+          key: mvn-dependencies-{{ checksum "pom.xml" }}
       - run: mvn jacoco:report-aggregate
       - run: "bash <(curl -s https://codecov.io/bash)"
